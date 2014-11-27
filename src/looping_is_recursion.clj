@@ -50,11 +50,13 @@
           (rest b-seq))))))
 
 (defn fast-fibo [n]
-  (loop [fn-1 0 f-n 0 curr 0]
-    (cond
-      (= (curr n)) f-n
-      (= (curr 0)) 0
-      :else (recur fn-1 (+ fn-1 f-n) (inc curr)))))
+  (cond
+    (= 0 n) 0
+    (= 1 n) 1
+    :else (loop [fn-2 0 fn-1 1 counter (- n 2)]
+            (if (= 0 counter)
+              (+ fn-1 fn-2)
+              (recur fn-1 (+ fn-1 fn-2) (dec counter))))))
 
 
 (defn cut-at-repetition [a-seq]
